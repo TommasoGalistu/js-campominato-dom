@@ -41,7 +41,7 @@ buttonFOrm.addEventListener('click', () =>{
     
     // creazione bombe
     let arrBombe = [];
-    while (arrBombe.length <= 16) {
+    while (arrBombe.length < 16) {
         let number = Math.floor(Math.random() * (numRighe * numRighe + 1));
         if(!(arrBombe.includes(number)) && number !== 0){
             arrBombe.push(number)
@@ -56,7 +56,7 @@ buttonFOrm.addEventListener('click', () =>{
 
     // attraverso il ciclo gli appendo tutti gli square
     for (let i = 1; i <= numSquare; i++) {
-        
+
         if(arrBombe.includes(i)){
             containerSquare.innerHTML += `<div class="square boom">bomba</div>`;
         }else{
@@ -74,28 +74,31 @@ buttonFOrm.addEventListener('click', () =>{
 
 
 let punteggio = 0;
+let finePartita = false;
 // evento che colora gli square
-mainContainer.addEventListener('click', (event) =>{
+mainContainer.addEventListener('click', function gioca(event) {
     // rintraccio l'elemento e lo manipolo
     let element = event.target
-    console.log(element)
+    testoPunteggio.textContent = `Punteggio: ` + punteggio;
     
-    if(element.classList.value === 'square'){
+    if(element.classList.value === 'square' && finePartita === false){
         element.classList.add('clicked');
         punteggio++
     }
-    else if(element.classList.value === 'square boom'){
+    else if(element.classList.value === 'square boom' && finePartita === false){
         element.classList.add('bomba');
+        finePartita = true;
+        testoPunteggio.textContent = `Purtroppo HAI PERSO la modalità ${modalita}..se non sai come vincere chiedi a Massimo`;
     }
-    
+    console.log(finePartita)
     // stampo in console il numero che è stato cliccato
     // if(element.contains('square')){
     //     console.log(event.target.textContent)
     // }
-    testoPunteggio.textContent = `Punteggio: ` + punteggio;
+    
     if(punteggio === (numSquare - 16)){
         testoPunteggio.textContent = `Sei fortissimo, hai vinto la modalità ${modalita}..bravo MASSIMO`;
-        removeEventListener('click', mainContainer);
+        finePartita = true;
     }
     
 });
