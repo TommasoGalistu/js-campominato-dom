@@ -53,7 +53,7 @@ buttonFOrm.addEventListener('click', () =>{
     for (let i = 1; i <= numSquare; i++) {
         let numPosizione = arrBombe.indexOf(i)
         if(numPosizione > 0){
-            containerSquare.innerHTML += `<div class="square">bomba</div>`;
+            containerSquare.innerHTML += `<div class="square boom">bomba</div>`;
         }else{
             containerSquare.innerHTML += `<div class="square">${i}</div>`;
         }
@@ -75,14 +75,11 @@ mainContainer.addEventListener('click', (event) =>{
     let element = event.target
     console.log(element)
     if(element.classList.value === 'square'){
-
         element.classList.add('clicked');
-
     }
-    // else if(element.attributes.attribute.value === 'bomba'){
-    //     element.classList.add('bomba');
-    // }
-    else{
+    else if(element.classList.value === 'square boom'){
+        element.classList.add('bomba');
+    }else{
         element.classList.remove('clicked')
     }
     // stampo in console il numero che è stato cliccato
