@@ -102,7 +102,7 @@ mainContainer.addEventListener('click', function gioca(event) {
             listaBombe[i].classList.add('bomba');
         }
         finePartita = true;
-        testoPunteggio.textContent = `Purtroppo HAI PERSO la modalità ${modalita}..se non sai come vincere chiedi a Massimo`;
+        testoPunteggio.textContent = `Purtroppo HAI PERSO la modalità ${modalita} con punteggio ${punteggio}..se non sai come vincere chiedi a Massimo`;
     }
     
     
