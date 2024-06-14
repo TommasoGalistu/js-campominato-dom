@@ -5,9 +5,10 @@ let contInput = document.querySelector('.contInput')
 var tuttaLaRoot = document.documentElement;
 let contRicaricaPage = document.querySelector('.contButtonRicarica');
 let contTestoPunteggio = document.querySelector('.punteggio')
+let testoPunteggio = document.querySelector('.testoPunteggio')
 
 let numSquare;
-
+let modalita;
 // al click spariranno gli input e apparirà il gioco
 buttonFOrm.addEventListener('click', () =>{
     // selezione default
@@ -20,13 +21,17 @@ buttonFOrm.addEventListener('click', () =>{
     switch (numSquare){
         case '100':
             numRighe = 10;
+            modalita = 'facile';
             break
         case '81':
             numRighe = 9;
+            modalita = 'media';
             break
         case '49':
             numRighe = 7;
+            modalita = 'difficile';
             break
+        
     }
     
     // cambio le dimensioni css in base alla scelta del giocatore
@@ -51,8 +56,8 @@ buttonFOrm.addEventListener('click', () =>{
 
     // attraverso il ciclo gli appendo tutti gli square
     for (let i = 1; i <= numSquare; i++) {
-        let numPosizione = arrBombe.indexOf(i)
-        if(numPosizione > 0){
+        
+        if(arrBombe.includes(i)){
             containerSquare.innerHTML += `<div class="square boom">bomba</div>`;
         }else{
             containerSquare.innerHTML += `<div class="square">${i}</div>`;
@@ -68,27 +73,33 @@ buttonFOrm.addEventListener('click', () =>{
 
 
 
-
+let punteggio = 0;
 // evento che colora gli square
 mainContainer.addEventListener('click', (event) =>{
     // rintraccio l'elemento e lo manipolo
     let element = event.target
     console.log(element)
+    
     if(element.classList.value === 'square'){
         element.classList.add('clicked');
+        punteggio++
     }
     else if(element.classList.value === 'square boom'){
         element.classList.add('bomba');
-    }else{
-        element.classList.remove('clicked')
     }
+    
     // stampo in console il numero che è stato cliccato
     // if(element.contains('square')){
     //     console.log(event.target.textContent)
     // }
-    
+    testoPunteggio.textContent = `Punteggio: ` + punteggio;
+    if(punteggio === (numSquare - 16)){
+        testoPunteggio.textContent = `Sei fortissimo, hai vinto la modalità ${modalita}..bravo MASSIMO`;
+        removeEventListener('click', mainContainer);
+    }
     
 });
+
 
 
 // evento che ritorna alla situazione di partenza per rigiocare
