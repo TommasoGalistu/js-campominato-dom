@@ -1,0 +1,6 @@
+:root{
+    --dimensioneGrid: 30rem;
+    /* nel bonus con js cambio la variabile numero square */
+    --numeroSquare: 10;
+    --latosquare: calc(var(--dimensioneGrid) / var(--numeroSquare)) 
+}
