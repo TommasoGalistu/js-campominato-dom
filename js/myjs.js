@@ -58,12 +58,23 @@ buttonFOrm.addEventListener('click', () =>{
     for (let i = 1; i <= numSquare; i++) {
 
         if(arrBombe.includes(i)){
-            containerSquare.innerHTML += `<div class="square boom">bomba</div>`;
+            containerSquare.innerHTML += `<div class="square boom">${i}</div>`;
+
         }else{
             containerSquare.innerHTML += `<div class="square">${i}</div>`;
         }
         
     }
+
+    // suggerimento in console per i tutor
+    let array = arrBombe;
+    
+    array.sort(function(a, b) {
+    return a - b;
+    });
+    console.log(`Se vuoi vincere evita le bombe in questa posizione: ${array}`)
+    // fine suggerimento per i tutor
+    
     // quando il container è completo lo appendo al main
     mainContainer.append(containerSquare)
     
