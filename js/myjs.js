@@ -79,18 +79,22 @@ let finePartita = false;
 mainContainer.addEventListener('click', function gioca(event) {
     // rintraccio l'elemento e lo manipolo
     let element = event.target
-    testoPunteggio.textContent = `Punteggio: ` + punteggio;
+    let listaBombe = document.querySelectorAll('.boom');
     
     if(element.classList.value === 'square' && finePartita === false){
         element.classList.add('clicked');
         punteggio++
+        testoPunteggio.textContent = `Punteggio: ` + punteggio;
     }
     else if(element.classList.value === 'square boom' && finePartita === false){
-        element.classList.add('bomba');
+        for (let i = 0; i < listaBombe.length; i++) {
+            listaBombe[i].classList.add('bomba');
+        }
         finePartita = true;
         testoPunteggio.textContent = `Purtroppo HAI PERSO la modalità ${modalita}..se non sai come vincere chiedi a Massimo`;
     }
-    console.log(finePartita)
+    
+    
     // stampo in console il numero che è stato cliccato
     // if(element.contains('square')){
     //     console.log(event.target.textContent)

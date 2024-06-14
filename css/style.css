@@ -51,9 +51,10 @@ button{
     align-items: center;
 
 }
-.square.bomba{
+.square.bomba.boom{
     background-color: red;
 }
+
 
 .square:hover{
     cursor: pointer;
